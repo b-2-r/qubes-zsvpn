@@ -4,11 +4,11 @@ Use ZSVPN through a ProxyVM running on Qubes OS.
 
 ## How it works
 
-The script first creates and starts a *temporary* AppVM. This AppVM is used to download and start the [VPN client](https://zsvpn.com/downloads). It then waits for the user to log in and connect to their preferred VPN server. Once a connection is established, it parses OpenVPN's command line arguments, this includes the VPN server's connection information, as well as the path to OpenVPN's config file and the paths to the VPN credentials downloaded by the VPN client (e.g. ca.crt). 
+The script first creates and starts a *temporary* AppVM. This AppVM is used to download and start the zSec's [VPN client](https://zsvpn.com/downloads). It then waits for the user to log in and connect to their preferred VPN server. Once a connection is established, it parses OpenVPN's command line arguments, this includes the VPN server's connection information, as well as the path to OpenVPN's config file and the paths to the VPN credentials downloaded by the VPN client (e.g. ca.crt).
 
-After getting all these information from the VPN client, the script proceeds with transferring the aforementioned files to *dom0*. Once they are placed in *dom0*, it modifies OpenVPN's config file in a way that it fulfills [Qubes-vpn-support](https://github.com/tasket/Qubes-vpn-support)'s setup requirements.  
+After getting all these information from the VPN client, the script proceeds with transferring the aforementioned files to *dom0*. Once they are placed in *dom0*, it modifies OpenVPN's config file in a way that it fulfills [Qubes-vpn-support](https://github.com/tasket/Qubes-vpn-support)'s setup requirements.
 
-The script then creates the actual ProxyVM. This ProxyVM is used to download and install Qubes-vpn-support. Once Qubes-vpn-support is downloaded and installed, the script transfers all files from *dom0* to the ProxyVM. As a final step the ProxyVM is restarted.
+The script then creates the actual ProxyVM. This ProxyVM is used to download and install Qubes-vpn-support. After Qubes-vpn-support was downloaded and installed, the script transfers all files from *dom0* to the ProxyVM. As a final step the ProxyVM is restarted.
 
 ## How-To Guide
 
@@ -47,15 +47,15 @@ Invoke the script.
 Press any key to continue...
 ```
 
-At this point the script starts the VPN client. Wait until the client did finish launching. Then, log into the VPN client and establish a connection with your your preferred VPN server.  If the client shows you a **"YOU ARE CONNECTED"** message, go back to your dom0 console and wake up the script by pressing any key on your keyboard.
+At this point create-proxyvm.sh starts the VPN client. Wait until the client did finish launching. Then, log into the VPN client and establish a connection with your preferred VPN server.  If the client shows you a **"YOU ARE CONNECTED"** message, go back to your dom0 console and wake up the script by pressing any key on your keyboard.
 
-**Note:**
+> **Note:**
+> You must wait until you see the **"YOU ARE CONNECTED"** message from the VPN client before you proceed with the script.
+>
+> **Also note:**
+> If the client shows you a **Problem checking IP Location Error: ETIMEDOUT** message, you can safely ignore this, it will not influence the final ProxyVM in any way.
 
-You must wait until you see the **"YOU ARE CONNECTED"** message from the VPN client before you proceed with the script.
-
-**Also note:**
-
-If the client shows you a **Problem checking IP Location Error: ETIMEDOUT** message, you can safely ignore this, it will not influence the final ProxyVM in any way.
+If everything is working fine you should see a few more info messages.
 
 ```
 [INFO] Parsing OpenVPN's command line arguments.
