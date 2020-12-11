@@ -78,7 +78,7 @@ Congrats, your ProxyVM (sys-zsvpn) is ready to use. To connect any AppVM with yo
 
 3. Click on **OK**.
 
-You can check your VPN setup by visiting [https://ipleak.net](). 
+You can check your VPN setup by visiting [https://ipleak.net](https://ipleak.net). 
 
 ## Testing Environment
 
