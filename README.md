@@ -4,11 +4,11 @@ Use ZSVPN through a ProxyVM running on Qubes OS.
 
 ## How it works
 
-The script first creates and starts a *temporary* AppVM. This AppVM is used to download and start the zSec's [VPN client](https://zsvpn.com/downloads). It then waits for the user to log in and connect to their preferred VPN server. Once a connection is established, it parses OpenVPN's command line arguments, this includes the VPN server's connection information, as well as the path to OpenVPN's config file and the paths to the VPN credentials downloaded by the VPN client (e.g. ca.crt).
+The script first creates and starts a *temporary* AppVM. This AppVM is used to download and start zSec's [VPN client](https://zsvpn.com/downloads). It then waits for the user to log in and connect to their preferred VPN server. Once a connection is established, it parses OpenVPN's command line arguments, this includes the VPN server's connection information, as well as the path to OpenVPN's client-side config file and the paths to the VPN credentials downloaded by the VPN client (e.g. ca.crt).
 
-After getting all these information from the VPN client, the script proceeds with transferring the aforementioned files to *dom0*. Once they are placed in *dom0*, it modifies OpenVPN's config file in a way that it fulfills [Qubes-vpn-support](https://github.com/tasket/Qubes-vpn-support)'s setup requirements.
+After getting all these information from the VPN client, the script proceeds with transferring the aforementioned files to dom0. Once they are placed in dom0, it modifies OpenVPN's config file in a way that it fulfills [Qubes-vpn-support](https://github.com/tasket/Qubes-vpn-support)'s setup requirements.
 
-The script then creates the actual ProxyVM. This ProxyVM is used to download and install Qubes-vpn-support. After Qubes-vpn-support was downloaded and installed, the script transfers all files from *dom0* to the ProxyVM. As a final step the ProxyVM is restarted.
+The script then creates the actual ProxyVM. This ProxyVM is used to download and install Qubes-vpn-support. After Qubes-vpn-support was downloaded and installed, the script transfers all files from dom0 to the ProxyVM. As a final step the ProxyVM is restarted.
 
 ## How-To Guide
 
@@ -24,7 +24,7 @@ Start a dom0 console.
 
 2. Click on **Terminal Emulator**
 
-Copy the create-proxyvm.sh script to dom0.
+Copy the *create-proxyvm.sh* script to dom0.
 
 ```
 [user@dom0 ~] qvm-run --pass-io domain "cat /home/user/qubes-zsvpn/create-proxyvm.sh" > create-proxyvm.sh
@@ -47,15 +47,15 @@ Invoke the script.
 Press any key to continue...
 ```
 
-At this point create-proxyvm.sh starts the VPN client. Wait until the client did finish launching. Then, log into the VPN client and establish a connection with your preferred VPN server.  If the client shows you a **"YOU ARE CONNECTED"** message, go back to your dom0 console and wake up the script by pressing any key on your keyboard.
+At this point *create-proxyvm.sh* starts the VPN client. Wait until the client did finish launching. Then, log into the VPN client and establish a connection with your preferred VPN server.  If the client shows you a **"YOU ARE CONNECTED"** message, go back to your dom0 console and wake up the script by pressing any key on your keyboard.
 
 > **Note:**
 > You must wait until you see the **"YOU ARE CONNECTED"** message from the VPN client before you proceed with the script.
->
+> 
 > **Also note:**
-> If the client shows you a **Problem checking IP Location Error: ETIMEDOUT** message, you can safely ignore this, it will not influence the final ProxyVM in any way.
+> If the client shows you a **"Problem checking IP Location Error: ETIMEDOUT"** message, you can safely ignore this, it will not influence the final ProxyVM in any way.
 
-If everything is working fine you should see a few more info messages.
+If everything is working fine you should see a few more messages.
 
 ```
 [INFO] Parsing OpenVPN's command line arguments.
@@ -70,11 +70,11 @@ If everything is working fine you should see a few more info messages.
 [INFO] Have fun with your new sys-zsvpn ProxyVM :)
 ```
 
-Congrats, your ProxyVM (sys-zsvpn) is ready to use. To connect any AppVM with your sys-zsvpn ProxyVM you need to go through the following steps.
+Congrats, your ProxyVM (*sys-zsvpn*) is ready to use. To connect any AppVM with your *sys-zsvp*n ProxyVM you need to go through the following steps.
 
 1. Open the **Qubes Settings** of the AppVM you wish to connect.
 
-2. In the Basic tab, change **Networking** to sys-zsvpn.
+2. In the Basic tab, change **Networking** to *sys-zsvpn*.
 
 3. Click on **OK**.
 
