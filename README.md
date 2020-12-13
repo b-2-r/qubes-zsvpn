@@ -55,7 +55,7 @@ At this point *create-proxyvm.sh* starts the VPN client. Wait until the client d
 > **Also note:**
 > If the client shows you a **"Problem checking IP Location Error: ETIMEDOUT"** message, you can safely ignore this, it will not influence the final ProxyVM in any way.
 
-If everything is working fine you should see a few more messages.
+If everything is working fine, you should see a few more messages.
 
 ```
 [INFO] Parsing OpenVPN's command line arguments.
